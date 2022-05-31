@@ -130,4 +130,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # User media files
 MEDIA_URL = '/media/'   # URL 접두어, 사용자가 만드는 모든 파일 앞에 붙을 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
