@@ -27,12 +27,11 @@ class Category(models.Model):
 class Menu(models.Model):
 
     name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=30, unique=True, allow_unicode=True, default="name")
+    slug = models.SlugField(max_length=30, unique=True, allow_unicode=True)
     price = models.IntegerField()
     content = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='menu/images/%Y/%m/%d/', blank=True)   # 이미지가 없어도 괜찮다. blank 속성 값 지정
+    image = models.ImageField(upload_to='menu/images', blank=True)   # 이미지가 없어도 괜찮다. blank 속성 값 지정
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
     # methods
     def __str__(self):
         return r'[%s] [%s] :: %s'%(self.category, self.name, self.price)

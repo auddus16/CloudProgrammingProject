@@ -12,3 +12,4 @@ class MenuAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Order)

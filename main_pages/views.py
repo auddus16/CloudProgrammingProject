@@ -109,3 +109,14 @@ class MenuDetail(DetailView):
 #             return redirect(post.get_absolute_url())
 #     else:
 #         raise PermissionDenied
+def show_category_menus(request, slug):
+
+    category = Category.objects.get(slug=slug)  # slug 값이 일치하는 카테고리
+    menu_list = Menu.objects.filter(category=category)
+
+    context = {
+        'category': category,  # 보여줄 카테고리
+        'menu_list': menu_list  # 위에서 만든 카테고리와 일치하는 게시글 리스트
+    }
+
+    return render(request, 'main_pages/menu_list.html', context)
