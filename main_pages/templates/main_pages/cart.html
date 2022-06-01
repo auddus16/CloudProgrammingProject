@@ -15,7 +15,7 @@
         <div style="">
         <div class="row" style="margin-left: 20%;">
           <div class="col-lg-3">
-            <h3 class="resume-title">주문 매장</h3>
+            <h3 class="resume-title">선택된 매장</h3>
             <div class="resume-item pb-0">
                 <h4><strong>스타벅스 가양점</strong></h4>
               <ul>
@@ -25,12 +25,14 @@
             </div>
           </div>
         <div class="col-lg-3">
-            <h3 class="resume-title">주문 목록</h3>
+            <h3 class="resume-title">담은 목록</h3>
             <div class="resume-item">
                 {% for menu in menu_list %}
 
                     <h4>{{ menu.name }} X {{ menu.count }}</h4>
-                    <h5>{{ menu.price }} X {{ menu.count }} = {{ menu.get_total_price }}</h5>
+                    <h5>{{ menu.price }}원 X {{ menu.count }}개 = {{ menu.get_total_price }}원</h5>
+                    &nbsp
+                    <a href="/del/{{ menu.slug }}"><img src="{% static 'assets/img/42465_x_icon.png' %}" width="20px" height="30%"></a>
 
                 {% endfor %}
           </div>
@@ -38,7 +40,7 @@
           <div class="col-lg-3">
             <div class="resume-item">
               <h3 class="resume-title">합계</h3>
-              <h5>{{ total_price }}</h5>
+              <h5>{{ total_price }}원</h5>
             </div>
 
 
@@ -48,7 +50,7 @@
         </div>
         <div style="margin-top: 10%;text-align: center;">
         <div style="height:50px; text-align: center;">
-            <a href= "/order" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 40%; height:100%;text-align: center;">
+            <a href= "/order/스타벅스 가양점/{{ total_price }}" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 40%; height:100%;text-align: center;">
                 <div style="margin-top: 8px;"><h4>주문하기</h4></div>
             </a>
             </div>

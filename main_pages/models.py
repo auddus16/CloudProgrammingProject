@@ -6,6 +6,8 @@ from markdown import markdown
 from markdownx.models import MarkdownxField
 
 # Category
+from phonenumber_field.modelfields import PhoneNumberField
+
 class Category(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
@@ -32,8 +34,8 @@ class Menu(models.Model):
     content = models.CharField(max_length=30)
     image = models.ImageField(upload_to='menu/images', blank=True)   # 이미지가 없어도 괜찮다. blank 속성 값 지정
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    state = models.BooleanField(default=False)
-    count = models.IntegerField(default=0)
+    state = models.BooleanField(default=False) # 담겼는지 여부
+    count = models.IntegerField(default=0) # 개수
 
     # methods
     def __str__(self):
@@ -52,6 +54,12 @@ class Menu(models.Model):
         self.count = 0
         self.state = False
 
+    def update_state_false(self):
+        self.state = False
+
+    def set_count_0(self):
+        self.count = 0
+
     def get_total_price(self):
         return self.count * self.price
 
@@ -59,13 +67,42 @@ class Menu(models.Model):
     #     return os.path.basename(self.attached_file.name)
 
 class Order(models.Model):
+
     price = models.IntegerField()
-    waitnum = models.IntegerField()
     store = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return r'[%s] :: %s'%(self.waitnum, self.price)
+        return r'[%s] :: %s'%(self.pk, self.price)
 
     def get_absolute_url(self):
         return f'/order/{self.pk}/'
+
+class Customer(models.Model):
+
+    phone = PhoneNumberField(unique = True, null = False, blank = False) # Here
+    stamp = models.IntegerField(default=0)
+
+    def __str__(self):
+        return r'[%s]'%(self.phone)
+
+    def add_stamp(self, cnt):
+        self.stamp += cnt
+
+    def minus_stamp(self):
+        self.stamp -= 10
+
+    def get_stamp(self):
+        return self.stamp
+
+class Coupon(models.Model):
+
+    price = models.IntegerField(default=3000)
+    name = models.CharField(default='3000원할인쿠폰', max_length=50)
+    created_at = models.DateField(auto_now_add=True)
+    expired = models.IntegerField(default=30)
+    state = models.BooleanField(default=False)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name} :: {self.customer.phone}'

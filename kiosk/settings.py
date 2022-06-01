@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'main_pages',
     'crispy_forms',
     'markdownx',
+    'phonenumber_field',
+    'phonenumbers',
 ]
 
 MIDDLEWARE = [
