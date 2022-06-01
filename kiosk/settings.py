@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_pages',
+    'home_pages',
     'crispy_forms',
     'markdownx',
     'phonenumber_field',
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'kiosk.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [BASE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
