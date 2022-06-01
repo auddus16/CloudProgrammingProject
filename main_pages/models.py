@@ -32,6 +32,7 @@ class Menu(models.Model):
     content = models.CharField(max_length=30)
     image = models.ImageField(upload_to='menu/images', blank=True)   # 이미지가 없어도 괜찮다. blank 속성 값 지정
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    state = models.BooleanField(default=False)
     # methods
     def __str__(self):
         return r'[%s] [%s] :: %s'%(self.category, self.name, self.price)

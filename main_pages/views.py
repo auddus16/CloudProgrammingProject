@@ -61,54 +61,6 @@ class MenuDetail(DetailView):
     #     context['comment_form'] = CommentForm
     #     return context
 
-
-# def show_category_posts(request, slug):
-#     if slug == 'no-category': # 미분류 글 요청
-#         category = '미분류'
-#         post_list = Post.objects.filter(category=None)
-#     else:
-#         category = Category.objects.get(slug=slug) # slug 값이 일치하는 카테고리
-#         post_list = Post.objects.filter(category=category)
-#
-#     context = {
-#         'categories' : Category.objects.all(), # 카테고리 리스트
-#         'count_posts_without_category' : Post.objects.filter(category=None).count(), # 미분류 카테고리 post 수
-#         'category' : category, # 보여줄 카테고리
-#         'post_list' : post_list # 위에서 만든 카테고리와 일치하는 게시글 리스트
-#     }
-#
-#     return render(request, 'blog/post_list.html', context)
-#
-# def show_tag_posts(request, slug):
-#     tag = Tag.objects.get(slug=slug)
-#     post_list = tag.post_set.all() # tag가 나(tag)를 참조하고 있는 post를 전부 가져와라.
-#
-#     context = {
-#         'categories': Category.objects.all(),
-#         'count_posts_without_category': Post.objects.filter(category=None).count(),
-#         'tag' : tag,
-#         'post_list' : post_list
-#     }
-#     return render(request, 'blog/post_list.html', context)
-#
-#
-# def add_comment(request, pk):
-#     if request.user.is_authenticated:
-#         post = get_object_or_404(Post, pk=pk)
-#
-#         if request.method == 'POST':
-#             comment_form = CommentForm(request.POST)
-#             if comment_form.is_valid():
-#                 comment = comment_form.save(commit=False)
-#                 comment.post = post # 가져온 post내용 들어감.
-#                 comment.author = request.user
-#                 comment.save()
-#
-#                 return redirect(comment.get_absolute_url())
-#         else:
-#             return redirect(post.get_absolute_url())
-#     else:
-#         raise PermissionDenied
 def show_category_menus(request, slug):
 
     category = Category.objects.get(slug=slug)  # slug 값이 일치하는 카테고리
@@ -120,3 +72,34 @@ def show_category_menus(request, slug):
     }
 
     return render(request, 'main_pages/menu_list.html', context)
+
+def add_cart(request, slug):
+    menu = Category.objects.get(slug=slug)
+    menu.state = True
+
+    menu_list = Menu.objects.filter(state=True)
+
+    total_price = 0
+    for m in menu_list:
+        total_price += m.price
+
+    context = {
+        'total_price' : total_price,
+        'menu_list': menu_list
+    }
+
+    return render(request, 'main_pages/cart.html',context)
+
+def show_cart_list(request):
+    menu_list = Menu.objects.filter(state=True)
+
+    total_price = 0
+    for m in menu_list:
+        total_price += m.price
+
+    context = {
+        'total_price' : total_price,
+        'menu_list': menu_list
+    }
+
+    return render(request, 'main_pages/cart.html',context)

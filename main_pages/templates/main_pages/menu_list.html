@@ -23,13 +23,14 @@
       <div class="container">
       <div class="row">
           {% for menu in menu_list %}
-              <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" href="{{ menu.get_absolute_url }}">
+              <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
               <div class="icon-box">
-                <img src="{{ menu.image.url}}" alt="Card image cap" width="260px" height="250px"><br><br>
+                <a  href="{{ menu.get_absolute_url }}"><img src="{{ menu.image.url}}" alt="Card image cap" width="260px" height="250px"><br><br>
                   <div>
                       <h5 class="title"><a>{{ menu.name }}</a></h5>
                       <p class="description">{{ menu.price }}원</p>
                   </div>
+                     </a>
               </div>
               </div>
               <br>
