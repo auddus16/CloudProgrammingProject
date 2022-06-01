@@ -33,12 +33,27 @@ class Menu(models.Model):
     image = models.ImageField(upload_to='menu/images', blank=True)   # 이미지가 없어도 괜찮다. blank 속성 값 지정
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     state = models.BooleanField(default=False)
+    count = models.IntegerField(default=0)
+
     # methods
     def __str__(self):
         return r'[%s] [%s] :: %s'%(self.category, self.name, self.price)
 
     def get_absolute_url(self):
         return f'/menu/{self.slug}/'
+
+    def add_count(self, cnt):
+        self.count += cnt
+
+    def update_state(self):
+        self.state = True
+
+    def init_status(self):
+        self.count = 0
+        self.state = False
+
+    def get_total_price(self):
+        return self.count * self.price
 
     # def get_file_name(self):    # 파일명이 경로가 아닌 이름으로 나오게 끔, 백에서
     #     return os.path.basename(self.attached_file.name)

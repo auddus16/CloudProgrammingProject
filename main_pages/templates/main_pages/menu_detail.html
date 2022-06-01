@@ -4,6 +4,31 @@
         <title>Blog</title>
 {% endblock %}
 {% block main_area %}
+<script>
+function count(type)  {
+  // 결과를 표시할 element
+  const resultElement = document.getElementById('result');
+
+  // 현재 화면에 표시된 값
+  let number = resultElement.innerText;
+
+  // 더하기/빼기
+  if(type === 'plus') {
+    number = parseInt(number) + 1;
+  }else if(type === 'minus')  {
+    number = parseInt(number) - 1;
+  }
+
+  // 결과 출력
+  resultElement.innerText = number;
+
+}
+
+function setHref() {
+    document.getElementById('add-btn').href = document.getElementById('add-btn').href+document.getElementById('result').textContent;
+}
+
+</script>
      <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -33,7 +58,7 @@
                 </div>
           </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4" style="text-align: center">
             <div class="portfolio-info">
               <h3>{{ menu.name }}</h3>
               <ul>
@@ -42,8 +67,15 @@
               </ul>
             </div>
                 <br><br><br>
-                <div style="text-align: center; height:40px">
-            <a href="#" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 50%; height:100%;">
+                <div class="row gy-3" style="text-align: center">
+
+                    <div class="col-lg-2"><input type='button' onclick='count("minus")' value='-'/></div>
+                    <div class="col-lg-2" id='result'>0</div>
+                    <div class="col-lg-2"><input type='button' onclick='count("plus")' value='+'/></div>
+                </div>
+                <br><br><br>
+                <div style="height:40px">
+            <a id="add-btn" onclick="setHref()" href= "/cart/{{ menu.slug }}/" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 50%; height:100%;">
                 <div style="margin-top: 8px;"><h4>담기</h4></div>
             </a>
             </div>
@@ -52,11 +84,6 @@
             </div>
           </div>
 
-
-
-        </div>
-
-      </div>
     </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
