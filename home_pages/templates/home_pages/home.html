@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'home_pages/base_home.html' %}
 {% load static %}
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Inner Page - Laura Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Laura - v4.7.0
-  * Template URL: https://bootstrapmade.com/laura-free-creative-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
+{% block main_area %}
 <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex justify-content-center align-items-center ">
 
@@ -73,26 +39,12 @@
             <div style="text-align: center;">
             <div style="display:inline-block;text-align: center;">
 
-              <div class="d-grid gap-2 col-12 mx-auto" style="margin-top: 35%;">
-                  <button class="btn btn-outline-secondary" type="submit" value="togo" onclick="location.href='/main'" style="font-size: 150%; width:400px; height:80px;"><strong>포장 / To go</strong></button>
-                <button class="btn btn-outline-secondary" type="submit" value="forhere" onclick="location.href='/main/type/forhere/start'" style="font-size: 150%; margin-top: 10%; height:80px;"><strong>매장 / For here</strong></button>
+              <div class="d-grid gap-2 col-12 mx-auto" style="margin-top: 45%;">
+                  <button class="btn btn-outline-warning btn-lg" type="submit" value="togo" onclick="location.href='/main'" style="font-size: 150%; width:400px; height:80px;"><strong>주문하기</strong></button>
               </div>
           </div>
           </div></div>
       </div>
       </div>
     </section><!-- End Portfolio Details Section -->
-
-  <script src="{% static 'assets/vendor/purecounter/purecounter.js' %}"></script>
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-
-  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
-  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets/js/main.js' %}"></script>
-</body>
-</html>
+{% endblock %}

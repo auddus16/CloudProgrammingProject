@@ -1,78 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'home_pages/base_home.html' %}
 {% load static %}
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Inner Page - Laura Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Laura - v4.7.0
-  * Template URL: https://bootstrapmade.com/laura-free-creative-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
+{% block main_area %}
 <!-- ======= Contact Me Section ======= -->
     <section id="contact" class="contact">
       <div class="container" style="text-align: center;">
 
         <div class="section-title">
           <h2>매장 검색 결과</h2>
-          <p>{{ searching }}</p>
+          <p>"{{ searching }}" 검색 결과</p>
         </div>
  <div class="col-lg-6" style="display: inline-block; text-align: center;">
               <div>
             <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">매장명</th>
+      <th scope="col">주소</th>
+      <th scope="col">위치</th>
+      <th scope="col">선택</th>
     </tr>
   </thead>
   <tbody>
+  {% for store in store_list %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+        <th scope="row"><a href="{{ store.place_url }}">{{ store.place_name}}</a></th>
+      <td>{{ store.address_name }}</td>
+      <td><button class="btn btn-outline-warning" onclick="location.href='{{ store.place_url }}'">위치</button></td>
+        <td>
+        <form action="/map/choice/" role="form" method="post" enctype ="multipart/form-data">{% csrf_token %}
+            <input type="hidden"  name="store_name" value="{{ store.place_name }}">
+            <input type="hidden"  name="store_address" value="{{ store.address_name }}">
+            <input type="hidden"  name="store_number" value="{{ store.phone }}">
+            <button class="btn btn-warning" type="submit" onclick="location.href='{{ store.place_url }}'">선택</button>
+        </form>
+    </td>
+
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  {% endfor %}
   </tbody>
 </table>
           </div>
@@ -81,16 +45,4 @@
       </div>
     </section><!-- End Contact Me Section -->
 
-<br><br><br><br><br><br><br><br>
-  <script src="{% static '/assets/vendor/purecounter/purecounter.js' %}"></script>
-  <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static '/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
-  <script src="{% static '/assets/vendor/php-email-form/validate.js' %}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static '/assets/js/main.js' %}"></script>
-</body>
-</html>
+{% endblock %}

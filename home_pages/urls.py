@@ -5,5 +5,6 @@ from home_pages import views
 urlpatterns = [
     path('', views.landing),
     path('map/searching/', views.search),
-    path('map/', views.show_map)
+    path('map/', views.show_map),
+    path('map/choice/', views.show_order),
 ]

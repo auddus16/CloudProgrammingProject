@@ -97,7 +97,7 @@ def del_menu(request, slug):
 
     return render(request, 'main_pages/cart.html', context)
 
-def order(request, store, price):
+def order(request, store, price, type):
     order = Order(store=store, price=price, type=type)
     order.save()
 
@@ -124,4 +124,5 @@ def show_map(request, type):
     context = {
         'type' : type
     }
-    return render(request, 'main_pages/map.html', context)
+    return render(request, 'home_pages/map.html', context)
+

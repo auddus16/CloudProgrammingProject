@@ -26,10 +26,28 @@ def search(request):
     places = requests.get(url, headers=headers).json()['documents']
     print(places)
     context = {
-        'searching' : searching
+        'searching' : searching,
+        'store_list' : places
     }
-    return render(request, 'home_pages/home.html')
+    return render(request, 'home_pages/resultmap.html', context)
 
 
 def show_map(request):
     return render(request, 'home_pages/map.html')
+
+
+def show_order(request):
+    menu_list = Menu.objects.filter(state=True)
+
+    total_price = 0
+    for m in menu_list:
+        total_price += m.price * m.count
+
+    context = {
+        'total_price': total_price,
+        'menu_list': menu_list,
+        'store_name' : request.POST.get('store_name'),
+        'store_address' : request.POST.get('store_address'),
+        'store_number' : request.POST.get('store_number')
+    }
+    return render(request, 'main_pages/cart2.html', context)
