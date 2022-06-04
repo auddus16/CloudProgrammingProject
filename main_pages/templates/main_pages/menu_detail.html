@@ -39,7 +39,7 @@ function setHref() {
           <h2>Menu Details > {{ menu.name }}</h2>
           <ol>
             <li><a href="/">Menu</a></li>
-            <li><a href="#">{{ menu.name }}</a></li>
+            <li><a href="{{ menu.image.url }}">{{ menu.name }}</a></li>
           </ol>
         </div>
 
@@ -75,7 +75,7 @@ function setHref() {
                 </div>
                 <br><br><br>
                 <div style="height:40px">
-            <a id="add-btn" onclick="setHref()" href= "/cart/{{ menu.slug }}/" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 50%; height:100%;">
+            <a id="add-btn" onclick="setHref()" href= "/main/cart/{{ menu.slug }}/" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 50%; height:100%;">
                 <div style="margin-top: 8px;"><h4>담기</h4></div>
             </a>
             </div>

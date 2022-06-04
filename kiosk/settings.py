@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'markdownx',
     'phonenumber_field',
     'phonenumbers',
+    'requests',
 ]
 
 MIDDLEWARE = [

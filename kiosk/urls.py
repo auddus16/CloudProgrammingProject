@@ -22,7 +22,7 @@ import main_pages
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/menu', include('main_pages.urls')),
+    path('main/', include('main_pages.urls')),
     path('', include('home_pages.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

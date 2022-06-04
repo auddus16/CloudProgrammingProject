@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from .models import Menu, Category, Order, Customer, Coupon
+from .models import Menu, Category, Order
 
 
 class MenuList(ListView):
@@ -98,7 +98,7 @@ def del_menu(request, slug):
     return render(request, 'main_pages/cart.html', context)
 
 def order(request, store, price):
-    order = Order(store=store, price=price)
+    order = Order(store=store, price=price, type=type)
     order.save()
 
     menu_list = Menu.objects.filter(state=True)
@@ -120,56 +120,8 @@ def order(request, store, price):
 
     return render(request, 'main_pages/order.html', context)
 
-# def show_coupon_list(request, phone): # 쿠폰리스트 검색
-#
-#     phone = '+821'+phone[3:]
-#
-#     coupon_list = None
-#     have_coupon =False
-#
-#     if Coupon.objects.filter(phone=phone):
-#         phone = '+821' + phone[3:]
-#         coupon_list = Coupon.objects.filter(phone=phone)
-#         have_coupon = True
-#
-#     context = {
-#         'have_coupon': have_coupon,
-#         'coupon_list': coupon_list
-#     }
-#
-#     return render(request, 'main_pages/order.html', context)
-#
-# def add_stamp_list(request, phone): # 스탬프 적립
-#     menu_list = Menu.objects.filter(state=True)
-#
-#     total_cnt = 0
-#     total_price =0
-#     for m in menu_list:
-#         total_cnt +=  m.count
-#         total_price += m.price * m.count
-#
-#     get_coupon = False
-#     get_stamp = False
-#     customer = None
-#     if Customer.objects.filter(phone=phone).exists():
-#         customer = Customer.objects.filter(phone=phone)
-#         customer.add_stamp(total_cnt)
-#         customer.save()
-#         get_stamp = True
-#
-#         #customer = Customer.objects.filter(phone=phone)
-#         if customer.get_stamp()>=10:
-#             customer.minus_stamp()
-#             new_coupon = Coupon(customer=customer)
-#             new_coupon.save()
-#             get_coupon = True
-#
-#     context = {
-#         'total_price': total_price,
-#         'menu_list': menu_list,
-#         'get_coupon' : get_coupon,
-#         'get_stamp' : get_stamp,
-#         'customer' : customer
-#     }
-#     return render(request, 'main_pages/order.html', context)
-
+def show_map(request, type):
+    context = {
+        'type' : type
+    }
+    return render(request, 'main_pages/map.html', context)

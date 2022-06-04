@@ -6,7 +6,6 @@ from markdown import markdown
 from markdownx.models import MarkdownxField
 
 # Category
-from phonenumber_field.modelfields import PhoneNumberField
 
 class Category(models.Model):
 
@@ -42,7 +41,7 @@ class Menu(models.Model):
         return r'[%s] [%s] :: %s'%(self.category, self.name, self.price)
 
     def get_absolute_url(self):
-        return f'/menu/{self.slug}/'
+        return f'/main/menu/{self.slug}/'
 
     def add_count(self, cnt):
         self.count += cnt
@@ -71,38 +70,11 @@ class Order(models.Model):
     price = models.IntegerField()
     store = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(max_length=10, default='togo')
 
     def __str__(self):
         return r'[%s] :: %s'%(self.pk, self.price)
 
     def get_absolute_url(self):
-        return f'/order/{self.pk}/'
+        return f'/main/order/{self.pk}/'
 
-class Customer(models.Model):
-
-    phone = PhoneNumberField(unique = True, null = False, blank = False) # Here
-    stamp = models.IntegerField(default=0)
-
-    def __str__(self):
-        return r'[%s]'%(self.phone)
-
-    def add_stamp(self, cnt):
-        self.stamp += cnt
-
-    def minus_stamp(self):
-        self.stamp -= 10
-
-    def get_stamp(self):
-        return self.stamp
-
-class Coupon(models.Model):
-
-    price = models.IntegerField(default=3000)
-    name = models.CharField(default='3000원할인쿠폰', max_length=50)
-    created_at = models.DateField(auto_now_add=True)
-    expired = models.IntegerField(default=30)
-    state = models.BooleanField(default=False)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.name} :: {self.customer.phone}'
