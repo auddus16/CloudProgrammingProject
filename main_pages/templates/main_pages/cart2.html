@@ -1,4 +1,4 @@
-{% extends 'main_pages/base.html' %}
+{% extends 'home_pages/base_home.html' %}
 {% load static %}
 {% block title %}
         <title>Blog</title>
@@ -6,30 +6,33 @@
 {% block main_area %}
 <br>
  <!-- ======= My Resume Section ======= -->
-    <section id="resume" class="resume" style="text-align: center;">
+    <section id="resume" class="resume">
       <div class="container" >
 
         <div class="section-title">
           <h2>담기 목록</h2>
         </div>
-        <div style="">
-        <div class="row" style="margin-left: 20%;">
+        <div class="row" style="margin-left: 25%;">
 
         <div class="col-lg-4">
             <h3 class="resume-title">담은 목록</h3>
             <div class="resume-item">
+            <p>주문 내용을 확인해주세요.</p>
                 {% for menu in menu_list %}
 
-                    <h4>{{ menu.name }} X {{ menu.count }}</h4>
+                    <h4>{{ menu.name }} X {{ menu.count }}개</h4>
                     <h5>{{ menu.price }}원 X {{ menu.count }}개 = {{ menu.get_total_price }}원</h5>
                     &nbsp
 
                 {% endfor %}
+            <hr>
+            <h3 class="resume-title">합계</h3>
+            <h5>total : {{ total_price }}원</h5>
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4" style="margin-left:10%;">
             <h3 class="resume-title">선택된 매장</h3>
-            <div class="resume-item pb-0">
+            <div class="resume-item">
                 <h4><strong>{{ store_name }}</strong></h4>
               <ul>
                 <li>{{ store_address}}</li>
@@ -37,24 +40,34 @@
               </ul>
             </div>
           </div>
-          <div class="col-lg-3">
-              <div class="resume-title">합계</div>
-              <h5>{{ total_price }}원</h5>
-            </div>
-
 
           </div>
-
-            </div>
         </div>
+    <script>
+        function load()
+	{
+
+        window.alert("주문 내역이 없습니다.");
+        window.location.href = "/";
+
+    }
+    </script>
+<div style="text-align: center;">
       <div class="col-lg-6" style="margin-top: 0;text-align: center;display:inline-block;">
             <div style="margin-top: 10%; display:inline-block; width: 100%;">
+                {% if total_price == 0 %}
 
-                  <button class="btn btn-warning btn-lg" type="submit" value="togo" onclick="location.href='/main/type/togo/{{ store_name }}/{{ total_price }}'" ><strong>Take-out 주문</strong></button>
+                  <button class="btn btn-warning btn-lg" type="submit" value="togo" onclick="load();" ><strong>Take-out 주문</strong></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-warning btn-lg" type="submit" value="forhere" onclick="load();"><strong>For here 주문</strong></button>
+                {% else %}
+                     <button class="btn btn-warning btn-lg" type="submit" value="togo" onclick="location.href='/main/type/togo/{{ store_name }}/{{ total_price }}'" ><strong>Take-out 주문</strong></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="btn btn-warning btn-lg" type="submit" value="forhere" onclick="location.href='/main/type/forhere/{{ store_name }}/{{ total_price }}'"><strong>For here 주문</strong></button>
+                {% endif %}
           </div>
           </div>
+</div>
 
     </section><!-- End My Resume Section -->
 {% endblock %}

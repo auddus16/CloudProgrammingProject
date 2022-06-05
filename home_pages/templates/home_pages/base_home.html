@@ -33,9 +33,29 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+<script type="text/javascript">
 
+	function gotoHome()
+	{
+        var confirm = window.confirm("진행 중인 주문을 취소 하고, 초기 화면으로 이동하시겠습니까?");
+        if(confirm){
+            	    window.location.href = "/";
+        }
+    }
+</script>
 <body>
+<!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex justify-content-center align-items-center ">
 
+    <nav id="navbar" class="navbar">
+      <ul>
+          <li><a class="nav-link scrollto active" href="/" onclick="gotoHome();" style="font-size: 20px;"><strong>STARBUCKS</strong></a></li>
+      </ul>
+
+    </nav><!-- .navbar -->
+
+  </header><!-- End Header -->
+<br><br>
 {% block main_area %}
 
 

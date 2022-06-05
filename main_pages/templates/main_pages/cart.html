@@ -12,8 +12,7 @@
         <div class="section-title">
           <h2>담기 목록</h2>
         </div>
-        <div style="">
-        <div class="row" style="margin-left: 20%;">
+        <div class="row" style="margin-left: 25%;">
 
         <div class="col-lg-4">
             <h3 class="resume-title">담은 목록</h3>
@@ -21,32 +20,62 @@
             <p>주문 내용을 확인해주세요.</p>
                 {% for menu in menu_list %}
 
-                    <h4>{{ menu.name }} X {{ menu.count }}</h4>
+                    <h4>{{ menu.name }} X {{ menu.count }}개</h4>
                     <h5>{{ menu.price }}원 X {{ menu.count }}개 = {{ menu.get_total_price }}원</h5>
                     &nbsp
                     <a href="/main/del/{{ menu.slug }}"><img src="{% static 'assets/img/42465_x_icon.png' %}" width="20px" height="30%"></a>
 
                 {% endfor %}
+            <hr>
+            <h3 class="resume-title">합계</h3>
+            <h5>total : {{ total_price }}원</h5>
           </div>
         </div>
-        <div class="col-lg-3">
+        <script>
+            function load2()
+	{
+
+        window.alert("주문 내역이 없습니다.\n메뉴를 먼저 골라주세요.");
+        window.location.href = "/main";
+
+    }
+        </script>
+        <div class="col-lg-3" style="margin-left:10%;">
             <h3 class="resume-title">선택된 매장</h3>
             <div class="resume-item pb-0">
-                <br>
-                <p>주문할 매장을 선택해주세요.</p>
-                <button class="btn btn-warning" type="submit" value="togo" onclick="location.href='/map'" ><strong>매장찾기</strong></button>
+                <p>주문 매장을 선택해주세요.</p>
+                {% if total_price == 0 %}
+
+                    <button class="btn btn-warning" type="submit" value="togo" onclick="load2();"><strong>매장찾기</strong></button>
+                {% else %}
+                    <button class="btn btn-warning" type="submit" value="togo" onclick="location.href='/map'"><strong>매장찾기</strong></button>
+            {% endif %}
             </div>
           </div>
-          <div class="col-lg-3">
-              <div class="resume-title">합계</div>
-              <h5>{{ total_price }}원</h5>
-            </div>
-
 
           </div>
 
             </div>
-        </div>
+    <script type="text/javascript">
+
+	function load()
+	{
+        var confirm = window.confirm("진행 중인 주문을 취소 하고, 초기 화면으로 이동하시겠습니까?");
+        if(confirm){
+            	    window.location.href = "/";
+        }
+    }
+
+
+</script>
+ <div style="text-align: center;">
+      <div class="col-lg-6" style="margin-top: 0;text-align: center;display:inline-block;">
+            <div style="margin-top: 10%; display:inline-block; width: 100%;">
+
+                <button class="btn btn-warning btn-lg" type="submit" value="forhere" onclick="load();"><strong>주문 취소</strong></button>
+          </div>
+          </div>
+</div>
 
     </section><!-- End My Resume Section -->
 {% endblock %}

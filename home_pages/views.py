@@ -5,6 +5,11 @@ import requests
 from main_pages.models import Menu
 
 def landing(request):
+    del_menu_list = Menu.objects.filter(state=True)
+    for m in del_menu_list: # 초기상태로 되돌리기
+        m.update_state_false()
+        m.set_count_0()
+        m.save()
     menu_list= Menu.objects.filter()
     context = {
         'menu_list' : menu_list[::-1]
