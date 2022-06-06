@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: kioskmy
+  - name: kiosk
     buildpack: python_buildpack
     memory: 512M
     instances: 1

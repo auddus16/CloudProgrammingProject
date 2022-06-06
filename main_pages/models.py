@@ -30,7 +30,7 @@ class Menu(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30, unique=True, allow_unicode=True)
     price = models.IntegerField()
-    content = models.CharField(max_length=30)
+    content = models.CharField(max_length=100)
     image = models.ImageField(upload_to='menu/images', blank=True)   # 이미지가 없어도 괜찮다. blank 속성 값 지정
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     state = models.BooleanField(default=False) # 담겼는지 여부
