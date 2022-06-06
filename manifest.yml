@@ -1,0 +1,7 @@
+---
+applications:
+  - name: kioskmy
+    buildpack: python_buildpack
+    memory: 512M
+    instances: 1
+    command : waitress-serve --port=8080 kiosk.wsgi:application
