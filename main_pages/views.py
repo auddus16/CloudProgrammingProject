@@ -67,9 +67,8 @@ def show_ordering(request, price): # 결제 화면으로 넘어가는 메소드
     total_price = 0
     for m in menu_list:
         total_price += m.price * m.count
-    have_coupon = False
+
     context = {
-        'have_coupon' : have_coupon,
         'total_price': total_price,
         'menu_list': menu_list
     }
@@ -88,9 +87,8 @@ def del_menu(request, slug):
     total_price = 0
     for m in menu_list:
         total_price += m.price * m.count
-    have_coupon = False
+
     context = {
-        'have_coupon': have_coupon,
         'total_price': total_price,
         'menu_list': menu_list
     }

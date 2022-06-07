@@ -2,7 +2,7 @@
 {% load static %}
 {% block main_area %}
 <!-- ======= Contact Me Section ======= -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" style="margin-top: 3%;">
       <div class="container" style="text-align: center;">
 
         <div class="section-title">
@@ -24,12 +24,12 @@
   {% for store in store_list %}
     <tr>
         <th scope="row"><a href="{{ store.place_url }}">{{ store.place_name}}</a></th>
-      <td>{{ store.address_name }}</td>
+      <td>{{ store.road_address_name }}</td>
       <td><button class="btn btn-outline-warning" onclick="location.href='{{ store.place_url }}'">위치</button></td>
         <td>
         <form action="/map/choice/" role="form" method="post" enctype ="multipart/form-data">{% csrf_token %}
             <input type="hidden"  name="store_name" value="{{ store.place_name }}">
-            <input type="hidden"  name="store_address" value="{{ store.address_name }}">
+            <input type="hidden"  name="store_address" value="{{ store.road_address_name }}">
             <input type="hidden"  name="store_number" value="{{ store.phone }}">
             <button class="btn btn-warning" type="submit" onclick="location.href='{{ store.place_url }}'">선택</button>
         </form>

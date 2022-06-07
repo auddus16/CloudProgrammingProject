@@ -50,7 +50,7 @@ function setHref() {
 
           <div class="col-lg-6" style="text-align: center">
                 <div class="swiper-slide" style="text-align: center">
-                  <img src="{{ menu.image.url }}" alt="">
+                  <img src="{{ menu.image.url }}" alt="" style="width: 450px;">
                 </div>
           </div>
 
@@ -63,16 +63,16 @@ function setHref() {
               </ul>
             </div>
                 <br><br><br>
-                <div style="display: inline-block;margin-top: 8%;">
+                <div style="display: inline-block;">
                 <div class="row gy-3">
 
-                    <div class="col-lg-4"><input type='button' onclick='count("minus")' value='-'/></div>
+                    <div class="col-lg-4"><input type='button' class="btn btn-outline-warning" onclick='count("minus")' value='-' style="width: 35px; text-align: center;"/></div>
                     <div class="col-lg-4" id='result'>1</div>
-                    <div class="col-lg-4"><input type='button' onclick='count("plus")' value='+'/></div>
+                    <div class="col-lg-4"><input type='button' class="btn btn-outline-warning" onclick='count("plus")' value='+' style="width: 35px; text-align: center;"/></div>
                 </div>
                 </div>
                 <br><br><br>
-                <div style="height:40px; margin-top: 20%;">
+                <div style="height:40px;">
             <a id="add-btn" onclick="setHref()" href= "/main/cart/{{ menu.slug }}/" style="display: inline-block;color: whitesmoke;background-color: #ffc041; width: 50%; height:100%;">
                 <div style="margin-top: 8px;"><h4>담기</h4></div>
             </a>
