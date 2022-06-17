@@ -1,5 +1,8 @@
 # CloudProgrammingProject
 ## Cafe Kiosk Web Project
+### 설명
+#### 가게 키오스크를 웹 사이트로 구현
 ### Flow Chart
-![image](https://user-images.githubusercontent.com/59945024/170260802-04517084-8adb-429c-8d5b-165c62e418f4.png)
+![image](https://user-images.githubusercontent.com/59945024/174280360-43dc9258-ced6-4faa-b794-84804ca6b470.png)
+
 
